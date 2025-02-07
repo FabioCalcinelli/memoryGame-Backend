@@ -3,14 +3,23 @@ from pydantic import BaseModel
 from starlette.middleware.cors import CORSMiddleware
 
 from game.logic import Game
+from game.models import HighscoreBoard
 
 app = FastAPI()
 nr_of_pairs = 3
 
+highscore_board = HighscoreBoard()
 game = Game(nr_of_pairs)
 
 class CardClickRequest(BaseModel):
     card_id: int
+
+class GetHighscoresRequest(BaseModel):
+    pass
+
+class AddHighscoreRequest(BaseModel):
+    highscore_name: str
+    highscore_score: int
 
 origins = [
     "http://localhost:5172",
@@ -36,6 +45,18 @@ async def start_game():
 @app.patch("/card_click")
 async def handle_card_click(request: CardClickRequest):
     game.update(request.card_id)
-    return {"game_state": game.get_state()}
+    return {"message": "Card clicked and game updated", "game_state": game.get_state()}
+
+@app.get("/get_highscores")
+async def get_highscores(request: GetHighscoresRequest):
+    return {"message": "Highscores", "highscores": highscore_board.get_highscores_in_order()}
+
+@app.patch("/add_highscore")
+async def add_highscore(request: AddHighscoreRequest):
+    highscore = HighscoreBoard.Highscore(request.highscore_name, request.highscore_score)
+    highscore_board.add_highscore(highscore)
+    return {"message": "Highscore added"}
+
+
 
 
