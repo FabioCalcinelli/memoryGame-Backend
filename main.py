@@ -6,7 +6,7 @@ from game.logic import Game
 from game.models import Highscore
 
 app = FastAPI()
-nr_of_pairs = 3
+nr_of_pairs = 20
 
 highscore_board_db = HighscoresDatabase("highscores.db")
 game = Game(nr_of_pairs)
