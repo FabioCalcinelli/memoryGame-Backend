@@ -1,21 +1,18 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from starlette.middleware.cors import CORSMiddleware
-
+from game.highscores_database import HighscoresDatabase
 from game.logic import Game
-from game.models import HighscoreBoard
+from game.models import Highscore
 
 app = FastAPI()
 nr_of_pairs = 3
 
-highscore_board = HighscoreBoard()
+highscore_board_db = HighscoresDatabase("highscores.db")
 game = Game(nr_of_pairs)
 
 class CardClickRequest(BaseModel):
     card_id: int
-
-class GetHighscoresRequest(BaseModel):
-    pass
 
 class AddHighscoreRequest(BaseModel):
     highscore_name: str
@@ -48,8 +45,8 @@ async def handle_card_click(request: CardClickRequest):
     return {"message": "Card clicked and game updated", "game_state": game.get_state()}
 
 @app.get("/get_highscores")
-async def get_highscores(request: GetHighscoresRequest):
-    return {"message": "Highscores", "highscores": highscore_board.get_highscores_in_order()}
+async def get_highscores():
+    return {"message": "Highscores", "highscores": highscore_board_db.get_highscores()}
 
 @app.patch("/add_highscore")
 async def add_highscore(request: AddHighscoreRequest):
@@ -57,8 +54,8 @@ async def add_highscore(request: AddHighscoreRequest):
         return {"error": "Invalid highscore name"}
     if request.highscore_score < 0:
         return {"error": "Invalid highscore score"}
-    highscore = HighscoreBoard.Highscore(request.highscore_name, request.highscore_score)
-    highscore_board.add_highscore(highscore)
+    highscore = Highscore(request.highscore_name, request.highscore_score)
+    highscore_board_db.add_highscore(highscore)
     return {"message": "Highscore added"}
 
 

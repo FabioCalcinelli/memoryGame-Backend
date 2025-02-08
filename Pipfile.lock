@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "0aaabf4ba1dd41f51cbdbd3c40e2bcd4f72bce0cdeec984b6068ff6e4bb42f26"
+            "sha256": "6041ba9e2f424a06b3e5957c6d6eacec41f42cbb444a28a8d57b8b9afbba3895"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -19,11 +19,11 @@
     "default": {
         "aiohappyeyeballs": {
             "hashes": [
-                "sha256:5fdd7d87889c63183afc18ce9271f9b0a7d32c2303e394468dd45d514a757745",
-                "sha256:a980909d50efcd44795c4afeca523296716d50cd756ddca6af8c65b996e27de8"
+                "sha256:147ec992cf873d74f5062644332c539fcd42956dc69453fe5204195e560517e1",
+                "sha256:9b05052f9042985d32ecbe4b59a77ae19c006a78f1344d7fdad69d28ded3d0b0"
             ],
-            "markers": "python_version >= '3.8'",
-            "version": "==2.4.4"
+            "markers": "python_version >= '3.9'",
+            "version": "==2.4.6"
         },
         "aiohttp": {
             "hashes": [
@@ -681,15 +681,6 @@
             "index": "pypi",
             "markers": "python_version >= '3.8'",
             "version": "==8.3.4"
-        },
-        "pytest-asyncio": {
-            "hashes": [
-                "sha256:9e89518e0f9bd08928f97a3482fdc4e244df17529460bc038291ccaf8f85c7c3",
-                "sha256:fc1da2cf9f125ada7e710b4ddad05518d4cee187ae9412e9ac9271003497f07a"
-            ],
-            "index": "pypi",
-            "markers": "python_version >= '3.9'",
-            "version": "==0.25.3"
         },
         "pytest-mock": {
             "hashes": [

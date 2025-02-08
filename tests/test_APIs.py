@@ -1,6 +1,6 @@
 import pytest
 from starlette.testclient import TestClient
-from main import game, app  # Replace 'your_app' with the actual name of your module
+from main import game, app
 
 @pytest.fixture
 def client():

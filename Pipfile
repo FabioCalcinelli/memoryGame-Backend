@@ -8,7 +8,6 @@ fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 pytest = "*"
 aiohttp = "*"
-pytest-asyncio = "*"
 httpx = "*"
 pytest-mock = "*"
 
