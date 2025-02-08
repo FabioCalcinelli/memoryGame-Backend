@@ -53,6 +53,10 @@ async def get_highscores(request: GetHighscoresRequest):
 
 @app.patch("/add_highscore")
 async def add_highscore(request: AddHighscoreRequest):
+    if not request.highscore_name or len(request.highscore_name) > 20:
+        return {"error": "Invalid highscore name"}
+    if request.highscore_score < 0:
+        return {"error": "Invalid highscore score"}
     highscore = HighscoreBoard.Highscore(request.highscore_name, request.highscore_score)
     highscore_board.add_highscore(highscore)
     return {"message": "Highscore added"}
